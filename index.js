@@ -13,6 +13,9 @@ for (let i = 0; i < 50000; i++) {
 }
 
 app.use(compression())
-app.get('/', (req, res) => res.send(largeObj))
+app.get('/', (req, res) => {
+  res.header('Cache-Control', 'public, max-age=3600')
+  res.send(largeObj)
+})
 
 app.listen(3000, () => console.log('[SERVER] Running...'))
